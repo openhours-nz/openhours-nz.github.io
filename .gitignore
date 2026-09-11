@@ -1,0 +1,6 @@
+# macOS Finder metadata — junk, never commit
+.DS_Store
+
+# editor/OS scratch
+*.swp
+*~
