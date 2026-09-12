@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-NZ">
+<html lang="en-NZ" class="dusk">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +7,8 @@
   <meta name="description" content="Web builds and automation for small accounting practices in Christchurch. A live tool that turns your website into something that makes the phone ring.">
   <meta name="robots" content="noindex">
   <link rel="stylesheet" href="/styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="/main.js" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -24,53 +26,73 @@
 </header>
 
 <main id="main">
-
-<section class="container section flow" style="--flow: var(--s-4)">
-  <p class="eyebrow">For small accounting practices · Christchurch</p>
-  <h1 class="hero">Websites and automation that work <em>while you're closed.</em></h1>
-  <p class="lede">A small, useful tool on your website that answers a real question for the people about to need an accountant — and turns the answer into a lead.</p>
-  <p><a class="btn btn--primary" href="#tool">See it work</a> <a class="btn btn--secondary" href="/contact/">Get in touch</a></p>
+<section class="hero-section glow-day">
+  <div class="container hero-grid" data-stagger>
+    <div class="flow" style="--flow: var(--s-4)">
+      <p class="eyebrow">For small accounting practices · Christchurch</p>
+      <h1 class="hero">Websites and automation that work <em>while you're closed.</em></h1>
+      <p class="lede">A small, useful tool on your website that answers the question people are googling at 9pm — and turns the answer into a lead in your inbox by morning.</p>
+      <p><a class="btn btn--primary" href="#tool">See it work</a> <a class="btn btn--secondary" href="/contact/">Get in touch</a></p>
+    </div>
+    <div class="card result flow" aria-label="Example result from the Set-Aside Calculator">
+      <p class="eyebrow">Set-Aside Calculator · example</p>
+      <p class="small">Sole trader · $85,000 income · $12,000 expenses · GST registered · first year</p>
+      <p class="result__big num"><span class="accent">$1,290</span> <span class="result__unit">a month</span></p>
+      <ul class="result__rows">
+        <li><span>Of every invoice</span><span class="num">≈ 18%</span></li>
+        <li><span>Income tax for the year</span><span class="num">≈ $14,100</span></li>
+        <li><span>ACC levies</span><span class="num">≈ $1,350</span></li>
+        <li><span>Provisional tax next year</span><span>Likely · 28 Aug, 15 Jan, 7 May</span></li>
+      </ul>
+      <p class="small">Illustrative. The live tool replaces this.</p>
+    </div>
+  </div>
 </section>
 
 <section class="container section flow">
   <p class="eyebrow">The problem</p>
   <h2 class="h2">Your website closes at five. <em>Your clients don't.</em></h2>
-  <p class="prose">Most accounting sites in Christchurch are brochures: services, a photo, a contact form. The form is the only way in.</p>
+  <p class="prose">Someone has just gone contracting. It's late, they've googled <em>how much tax do I put aside as a sole trader</em>, and they'll choose an accountant in the next fortnight. Right now they land on Hnry, or on a site that says "contact us for a consultation" — and they don't. A brochure can't help anyone at 9pm. A tool can.</p>
 </section>
 
 <section class="container section flow" id="tool">
   <p class="eyebrow">The tool</p>
   <h2 class="h2">The Set-Aside Calculator</h2>
-  <p class="prose">Six questions. One real number: how much to put aside for tax, each month and from every invoice — and whether provisional tax is coming.</p>
+  <p class="prose">Six questions — income, expenses, other income, GST, kind of work, first year or not — and a real number: how much to put aside each month and from every invoice, whether provisional tax is coming, and when. Then one button: <em>email me the breakdown.</em> It asks for a name and an email. That's your lead, with everything they told it attached.</p>
   <div class="slot">The live calculator goes here (build 1b).</div>
 </section>
 
 <section class="container section flow" style="--flow: var(--s-4)">
   <p class="eyebrow">How it works</p>
   <h2 class="h2">Preview. Install. <em>Leads.</em></h2>
-  <div class="grid steps">
-    <div class="card flow"><p class="eyebrow">Preview</p><p class="h3">Your name, your colours, live at a link for 14 days.</p></div>
-    <div class="card flow"><p class="eyebrow">Install</p><p class="h3">One line on your existing site. Wix, Squarespace, WordPress.</p></div>
-    <div class="card flow"><p class="eyebrow">Leads</p><p class="h3">Every breakdown someone emails themselves lands in your inbox, with context.</p></div>
+  <div class="grid steps" data-stagger>
+    <div class="card flow"><p class="eyebrow">Preview</p><p class="h3">Your name, your colours, live at a link for 14 days.</p><p>Free. Show it to your team, poke at it, decide.</p></div>
+    <div class="card flow"><p class="eyebrow">Install</p><p class="h3">One line on the site you already have.</p><p>Wix, Squarespace, WordPress — the platforms Christchurch practices actually use. No rebuild. Install is the moment you pay.</p></div>
+    <div class="card flow"><p class="eyebrow">Leads</p><p class="h3">Every breakdown lands in your inbox too.</p><p>With their income, GST status, whether it's their first year, and whether they already have an accountant.</p></div>
   </div>
 </section>
 
 <section class="container section flow">
-  <p class="eyebrow">What we found</p>
+  <p class="eyebrow">What I found</p>
   <h2 class="h2">Twenty-three Christchurch accounting websites. <em>None</em> with a way to capture a lead beyond a contact form.</h2>
-  <p class="prose">Six were broken and didn't know. Details on the <a href="/work/">Work</a> page.</p>
+  <div class="grid stats" data-stagger>
+    <div><p class="stat num">23</p><p class="small">practices, checked one by one</p></div>
+    <div><p class="stat num">0</p><p class="small">with any lead capture beyond a contact form</p></div>
+    <div><p class="stat num">6</p><p class="small">broken, lost, or hijacked — and probably don't know</p></div>
+  </div>
+  <p class="prose">In September 2026 I went through twenty-three small practices in Christchurch, one by one. Not one had a tool, a calculator with capture, or any way in beyond "contact us". Six were broken, lost, or hijacked — a "we've moved" placeholder, a 404, a domain that now sells something else entirely. Nobody is named. The full write-up is on the <a href="/work/">Work</a> page.</p>
 </section>
 
 <section class="container section flow">
   <p class="eyebrow">Who</p>
-  <h2 class="h2">One person. Real name, real face.</h2>
-  <p class="prose">Jayden Ashby, Christchurch. <a href="/about/">About Openhours.</a></p>
+  <h2 class="h2">One person. <em>Real name, real face.</em></h2>
+  <p class="prose">I'm Jayden Ashby. I build these myself, in Christchurch, and I answer my own email. Openhours is small on purpose: one kind of client, one tool done properly, and then whatever you actually ask for next. <a href="/about/">More about Openhours.</a></p>
 </section>
 
 <section class="surface section glow" data-theme="night">
   <div class="container flow" style="--flow: var(--s-4)">
     <h2 class="hero">The light <em>stays on.</em></h2>
-    <p class="lede">Send a message. I reply within one working day.</p>
+    <p class="lede">Send a message. I reply within one working day — evenings included, which is rather the point.</p>
     <p><a class="btn btn--primary" href="/contact/">Get in touch</a></p>
   </div>
 </section>

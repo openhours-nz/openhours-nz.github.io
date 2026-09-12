@@ -172,3 +172,60 @@ a:hover { text-decoration-thickness: 2px; }
 .steps { counter-reset: step; }
 .steps > * { counter-increment: step; }
 .steps > * > .eyebrow::before { content: counter(step, decimal-leading-zero) " · "; }
+
+/* ---------- 8. MOTION, FOR REAL — arrivals, and day→night ---------- */
+/* Arrivals. Only when JS is running (html.js) and the visitor hasn't asked for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js main section > :not(.container):not([data-stagger]),
+  html.js main section > .container > :not([data-stagger]),
+  html.js main [data-stagger] > * {
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+  html.js main section > :not(.container):not([data-stagger]):not(.is-in),
+  html.js main section > .container > :not([data-stagger]):not(.is-in),
+  html.js main [data-stagger] > :not(.is-in) {
+    opacity: 0; transform: translateY(14px);
+  }
+}
+
+/* Day → night. The role tokens are registered as real colours so the browser can interpolate them,
+   then animated on <html class="dusk"> (Home only) against the page's scroll position. No JavaScript. */
+@property --bg       { syntax: "<color>"; inherits: true; initial-value: #FAF9F6; }
+@property --fg       { syntax: "<color>"; inherits: true; initial-value: #0F1319; }
+@property --fg-muted { syntax: "<color>"; inherits: true; initial-value: #5A5F6B; }
+@property --accent   { syntax: "<color>"; inherits: true; initial-value: #9A5F10; }
+@property --line     { syntax: "<color>"; inherits: true; initial-value: rgb(15 19 25 / 0.12); }
+
+@keyframes dusk-bg { from { --bg: #FAF9F6; } 55% { --bg: #6B5F58; } to { --bg: #0F1319; } }   /* through a warm dusk, not a neutral grey */
+@keyframes dusk-fg {
+  from { --fg: #0F1319; --fg-muted: #5A5F6B; --accent: #9A5F10; --line: rgb(15 19 25 / 0.12); }
+  to   { --fg: #FAF9F6; --fg-muted: #A8ACB5; --accent: #E9A23B; --line: rgb(250 249 246 / 0.14); }
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    html.dusk {
+      /* background eases through the greys quickly (ease-in-out); text FLIPS once, at the moment the lamp comes on
+         (steps), so there is never a grey-on-grey moment. Ranges are % of the page's scroll. */
+      animation: dusk-bg ease-in-out both, dusk-fg steps(1, end) both;
+      animation-timeline: scroll(root), scroll(root);
+      animation-range: 30% 72%, 30% 55%;
+    }
+  }
+}
+
+/* ---------- 9. HOME — hero, result card, stats ---------- */
+.hero-section { min-height: min(86vh, 56rem); display: grid; align-content: center; }
+.glow-day { background: radial-gradient(70rem 42rem at 92% -10%, rgb(233 162 59 / 0.16), transparent 62%); }
+.hero-grid { display: grid; gap: var(--s-6); align-items: center; }
+@media (min-width: 60rem) { .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: var(--s-8); } }
+
+.result { --flow: var(--s-3); background: color-mix(in oklab, var(--bg) 92%, var(--fg)); box-shadow: 0 1px 0 var(--line), 0 24px 60px -30px rgb(15 19 25 / 0.35); }
+.result__big { font-size: clamp(2.75rem, 2rem + 3vw, 4rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+.result__unit { font-size: var(--text-h3); font-weight: 500; color: var(--fg-muted); letter-spacing: 0; }
+.result__rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.result__rows li { display: flex; justify-content: space-between; gap: var(--s-3); padding: 0.7em 0; border-bottom: 1px solid var(--line); font-size: var(--text-small); }
+.result__rows li span:last-child { text-align: right; font-weight: 500; }
+
+.stats > div { padding-block: var(--s-2); border-top: 1px solid var(--line); }
+.stat { font-size: var(--text-hero); font-weight: 600; letter-spacing: -0.03em; line-height: 1; color: var(--accent); margin-bottom: var(--s-1); }
