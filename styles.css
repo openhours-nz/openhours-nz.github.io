@@ -148,3 +148,27 @@ a:hover { text-decoration-thickness: 2px; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ---------- 7. SITE CHROME — nav, footer, skip link ---------- */
+.skip { position: absolute; left: -999px; top: var(--s-2); background: var(--accent-surface); color: var(--on-accent); padding: 0.6em 1em; border-radius: var(--radius); z-index: 10; }
+.skip:focus { left: var(--s-2); }
+
+.nav { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); flex-wrap: wrap; padding-block: var(--s-3); }
+.wordmark { font-weight: 600; letter-spacing: -0.02em; color: var(--fg); text-decoration: none; font-size: 1.125rem; }
+.nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--s-3); align-items: center; flex-wrap: wrap; }
+.nav a:not(.wordmark):not(.btn) { color: var(--fg-muted); text-decoration: none; font-size: var(--text-small); font-weight: 500; }
+.nav a:not(.wordmark):not(.btn):hover { color: var(--fg); }
+/* :not(.btn) is only there to match the specificity of the rule above, so this one (later) wins */
+.nav a:not(.btn)[aria-current="page"] { color: var(--fg); text-decoration: underline; text-underline-offset: 0.35em; text-decoration-thickness: 1.5px; }
+.nav .btn { padding: 0.6em 1em; font-size: var(--text-small); }
+
+.footer { border-top: 1px solid var(--line); padding-block: var(--s-6); font-size: var(--text-small); color: var(--fg-muted); }
+.footer .row { display: flex; justify-content: space-between; gap: var(--s-3); flex-wrap: wrap; align-items: baseline; }
+.footer a { color: inherit; }
+.footer ul { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--s-3); flex-wrap: wrap; }
+
+.page-title { padding-block: var(--section) var(--s-6); }
+.slot { border: 1px dashed var(--line); border-radius: var(--radius-lg); padding: var(--s-6); text-align: center; color: var(--fg-muted); }   /* scaffolding: where a real thing goes; removed when it does */
+.steps { counter-reset: step; }
+.steps > * { counter-increment: step; }
+.steps > * > .eyebrow::before { content: counter(step, decimal-leading-zero) " · "; }
