@@ -4,8 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Work — Openhours</title>
-  <meta name="description" content="The Set-Aside Calculator, live, and what we found looking at twenty-three Christchurch accounting websites.">
+  <meta name="description" content="The Set-Aside Calculator, live, and what I found checking 160 New Zealand accounting practice websites.">
   <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://openhours-nz.github.io/work/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Openhours">
+  <meta property="og:title" content="Work — Openhours">
+  <meta property="og:description" content="The Set-Aside Calculator, live, and what I found checking 160 New Zealand accounting practice websites.">
+  <meta property="og:url" content="https://openhours-nz.github.io/work/index.html">
+  <meta property="og:image" content="https://openhours-nz.github.io/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#FAF9F6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F1319" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="/styles.css">
   <script>document.documentElement.classList.add('js')</script>
   <script src="/main.js" defer></script>
@@ -30,15 +42,44 @@
 <section class="container page-title flow">
   <p class="eyebrow">Work</p>
   <h1 class="hero">Show, <em>don't tell.</em></h1>
+  <p class="lede">The tool, full size. Then the research it came out of — method, numbers, and what they mean — with nobody named.</p>
 </section>
-<section class="container section flow">
+
+<section class="container section flow" id="tool">
+  <p class="eyebrow">The tool</p>
   <h2 class="h2">The Set-Aside Calculator</h2>
-  <p class="prose">The tool, full size, in Openhours colours. What we'd put on your site, in yours.</p>
+  <p class="prose">This is the version in Openhours colours. Yours would carry your name, your colours, and send its leads to you.</p>
   <div class="slot">The live calculator goes here (build 1b).</div>
 </section>
-<section class="container section flow">
-  <h2 class="h2">What we found</h2>
-  <p class="prose">Twenty-three small accounting practices in Christchurch, checked one by one in September 2026. Written up here, honestly, without naming anyone.</p>
+
+<section class="container section flow" style="--flow: var(--s-4)">
+  <p class="eyebrow">What I found · September 2026</p>
+  <h2 class="h2">160 accounting practice websites. <em>Zero</em> lead capture beyond a contact form.</h2>
+  <p class="prose"><strong>Method.</strong> On 11 September I checked 23 small practices in Christchurch by hand. On 12 September I swept a national directory of accountants — search4accountants.co.nz — across all sixteen regions: 1,766 listings, of which 241 listed a website. A script fetched every homepage and the first linked "calculator" or "tools" page, recorded the platform, forms, widgets and any sign of a tool, and flagged anything broken. Listings that were mortgage brokers, insurers, lenders or software companies were set aside; 160 were accounting or bookkeeping practices. Anything that looked like a real tool was checked by hand.</p>
+  <div class="findings">
+    <div><p class="stat num">131</p><p>practice websites live and reachable.</p></div>
+    <div><p class="stat num">26</p><p><strong>dead, parked, hijacked or 404.</strong> Nineteen of those domains no longer resolve at all — the registration has lapsed. Two now serve casino spam under the firm's old address. One in six.</p></div>
+    <div><p class="stat num">46</p><p>of the 131 live sites have a contact form on the home page — 35%. The rest offer an email address, a phone number, or a "book a consultation" link.</p></div>
+    <div><p class="stat num">12</p><p>have the same off-the-shelf <strong>pack of generic calculators</strong> — reverse mortgage, loan repayments, "how long to repay". Identical on every site. Built for an Australian audience. None captures a lead.</p></div>
+    <div><p class="stat num">2</p><p>have a <strong>genuine custom calculator</strong>: one a mileage-claim calculator, one a franchise's GST and rental-yield tools. Neither asks for a name.</p></div>
+    <div><p class="stat num">0</p><p>have a <strong>calculator that captures a lead.</strong> Not one, in the whole sample.</p></div>
+    <div><p class="stat num">6</p><p>live sites still don't have HTTPS — the browser shows "Not secure" next to the firm's name.</p></div>
+    <div><p class="stat num">7</p><p>have a chat widget or an online booking link, combined. Five and two.</p></div>
+  </div>
+  <table class="table" aria-label="Platforms of the 131 live practice websites">
+    <thead><tr><th>Platform (131 live sites)</th><th class="num">Sites</th><th class="num">Share</th></tr></thead>
+    <tbody>
+      <tr><td>WordPress</td><td class="num">59</td><td class="num">45%</td></tr>
+      <tr><td>Hand-built / unidentified</td><td class="num">28</td><td class="num">21%</td></tr>
+      <tr><td>Website.com</td><td class="num">13</td><td class="num">10%</td></tr>
+      <tr><td>Squarespace</td><td class="num">11</td><td class="num">8%</td></tr>
+      <tr><td>Wix</td><td class="num">8</td><td class="num">6%</td></tr>
+      <tr><td>Rocketspark, GoDaddy, Weebly, other</td><td class="num">12</td><td class="num">9%</td></tr>
+    </tbody>
+  </table>
+  <p class="prose"><strong>What it means.</strong> Almost every practice website in the country is a brochure with a form on it. The only "tools" in circulation are a template pack that answers questions a New Zealand sole trader isn't asking. The one question they <em>are</em> asking — <em>how much should I put aside?</em> — is answered by nobody's website, so it's answered by Hnry's. And one site in six has quietly died under its owner.</p>
+  <p class="prose"><strong>Limits.</strong> One directory, so firms with no listing there aren't counted. Home pages and one linked page only — a tool buried three clicks deep could be missed. A script can't see everything a browser renders. The counts are conservative in one direction: they can undercount tools, not invent them.</p>
+  <p class="small">Christchurch subset, checked by hand 11 September: 23 practices, 0 with lead capture, 6 broken. Both samples are kept, row by row, and the numbers on this page will be updated as they grow.</p>
 </section>
 </main>
 
