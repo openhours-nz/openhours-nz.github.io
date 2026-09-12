@@ -1,0 +1,150 @@
+/* ============================================================
+   Openhours — styles.css
+   One stylesheet for the whole site. Sections:
+   1 tokens · 2 base · 3 type · 4 layout · 5 components · 6 motion
+   The idea behind the palette: paper by day, ink by night,
+   and one lamp left on after hours.
+   ============================================================ */
+
+/* ---------- 0. FONT — Inter, self-hosted, one variable file per style ---------- */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/InterVariable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/InterVariable-Italic.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ---------- 1. TOKENS — every decision, made once, named ---------- */
+:root {
+  /* palette (raw colours — pages never use these directly) */
+  --paper:    #FAF9F6;   /* warm off-white */
+  --ink:      #0F1319;   /* blue-black, not pure black */
+  --lamp:     #E9A23B;   /* amber — as a SURFACE, or as text on ink */
+  --lamp-ink: #9A5F10;   /* amber as TEXT on paper (4.96:1, passes AA) */
+
+  /* roles (what pages actually use — swap these to switch day/night) */
+  --bg:             var(--paper);
+  --fg:             var(--ink);
+  --fg-muted:       #5A5F6B;
+  --accent:         var(--lamp-ink);
+  --accent-surface: var(--lamp);
+  --on-accent:      var(--ink);
+  --line:           rgb(15 19 25 / 0.12);
+
+  /* type — fluid: the middle value scales with the viewport, clamped at both ends */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --text-hero:  clamp(2.5rem, 1.5rem + 4.5vw, 5rem);       /* 40px → 80px */
+  --text-h2:    clamp(1.75rem, 1.25rem + 2.25vw, 3rem);    /* 28px → 48px */
+  --text-h3:    clamp(1.25rem, 1.125rem + 0.6vw, 1.625rem);/* 20px → 26px */
+  --text-body:  clamp(1.0625rem, 1rem + 0.25vw, 1.125rem); /* 17px → 18px */
+  --text-small: 0.9375rem;                                  /* 15px */
+  --leading-tight: 1.05;
+  --leading-snug:  1.2;
+  --leading-body:  1.55;
+
+  /* spacing — an 8px grid. --s-2 = 16px, --s-4 = 32px, and so on */
+  --s-1: 0.5rem;  --s-2: 1rem;  --s-3: 1.5rem;  --s-4: 2rem;
+  --s-6: 3rem;    --s-8: 4rem;  --s-12: 6rem;   --s-16: 8rem;
+  --section:   clamp(4rem, 8vw, 8rem);        /* vertical padding of a page section */
+  --gutter:    clamp(1.25rem, 4vw, 3rem);     /* side padding */
+  --container: 72rem;                          /* 1152px max content width */
+  --measure:   62ch;                           /* max line length for prose */
+
+  --radius:    0.5rem;
+  --radius-lg: 1rem;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur:  400ms;
+}
+
+/* Night: same tokens, roles swapped. Put data-theme="night" on any element. */
+[data-theme="night"] {
+  --bg:       var(--ink);
+  --fg:       var(--paper);
+  --fg-muted: #A8ACB5;
+  --accent:   var(--lamp);
+  --line:     rgb(250 249 246 / 0.14);
+}
+
+/* ---------- 2. BASE ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+img, svg { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent-surface); color: var(--on-accent); }
+.surface { background: var(--bg); color: var(--fg); }   /* a block that paints its own theme */
+.glow    { background: radial-gradient(70rem 45rem at 85% 15%, rgb(233 162 59 / 0.22), transparent 60%), var(--bg); }   /* the lamp, as a lamp */
+
+/* ---------- 3. TYPE ---------- */
+.hero   { font-size: var(--text-hero); line-height: var(--leading-tight); letter-spacing: -0.03em; font-weight: 600; text-wrap: balance; }
+.h2     { font-size: var(--text-h2);   line-height: 1.1;                   letter-spacing: -0.02em; font-weight: 600; text-wrap: balance; }
+.h3     { font-size: var(--text-h3);   line-height: var(--leading-snug);   letter-spacing: -0.01em; font-weight: 600; }
+.lede   { font-size: calc(var(--text-body) * 1.2); color: var(--fg-muted); max-width: var(--measure); text-wrap: pretty; }
+.small  { font-size: var(--text-small); color: var(--fg-muted); }
+.eyebrow{ font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--fg-muted); }
+.num    { font-variant-numeric: tabular-nums; }   /* digits all the same width — numbers don't jiggle */
+.accent { color: var(--accent); }
+.hero em, .h2 em { font-style: italic; color: var(--accent); }   /* the one turn per headline, in Lamp */
+
+/* ---------- 4. LAYOUT ---------- */
+.container { max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.section   { padding-block: var(--section); }
+.prose     { max-width: var(--measure); text-wrap: pretty; }
+.flow > * + * { margin-top: var(--flow, var(--s-2)); }   /* vertical rhythm: space BETWEEN children only */
+.grid { display: grid; gap: var(--s-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+
+/* ---------- 5. COMPONENTS ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5em;
+  padding: 0.8em 1.3em; border-radius: var(--radius);
+  font: inherit; font-weight: 600; line-height: 1;
+  text-decoration: none; border: 1px solid transparent; cursor: pointer;
+  transition: background-color 150ms var(--ease), border-color 150ms var(--ease), transform 150ms var(--ease);
+}
+.btn:active { transform: translateY(1px); }
+.btn--primary   { background: var(--accent-surface); color: var(--on-accent); }
+.btn--primary:hover { background: color-mix(in oklab, var(--accent-surface) 86%, var(--ink)); }
+.btn--secondary { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn--secondary:hover { border-color: var(--fg); }
+
+.field { display: grid; gap: 0.4rem; }
+.field label { font-weight: 600; font-size: var(--text-small); }
+.field input, .field textarea, .field select {
+  font: inherit; color: var(--fg); background: transparent;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 0.7em 0.9em; width: 100%;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  outline: none; border-color: var(--fg);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-surface) 35%, transparent);
+}
+.field .hint { font-size: var(--text-small); color: var(--fg-muted); }
+
+.card { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s-4); }
+.rule { border: 0; border-top: 1px solid var(--line); margin: 0; }
+
+/* ---------- 6. MOTION — off for anyone who asked for it off ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en-NZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Openhours — style guide</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Only the style guide needs these — not part of the site. */
+    .sg-swatches { display: grid; gap: var(--s-2); grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
+    .sg-swatch { border-radius: var(--radius-lg); padding: var(--s-3); min-height: 8rem; display: flex; flex-direction: column; justify-content: flex-end; border: 1px solid var(--line); }
+    .sg-swatch code { font-size: var(--text-small); opacity: 0.8; }
+    .sg-scale { display: grid; gap: var(--s-1); }
+    .sg-scale > div { display: flex; align-items: center; gap: var(--s-2); }
+    .sg-scale > div > span:first-child { width: 4rem; font-size: var(--text-small); color: var(--fg-muted); font-variant-numeric: tabular-nums; }
+    .sg-scale > div > span:last-child { background: var(--accent-surface); height: 0.75rem; border-radius: 2px; }
+    .sg-row { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; }
+    .sg-label { font-size: var(--text-small); color: var(--fg-muted); font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+
+<header class="container section flow">
+  <p class="eyebrow">Openhours — style guide · not linked, not indexed</p>
+  <h1 class="hero">Paper by day. Ink by night. One lamp left on.</h1>
+  <p class="lede">Every colour, size and space on the site is decided here, once, and named. Pages use the names. Change it here and every page follows.</p>
+</header>
+
+<hr class="rule">
+
+<section class="container section flow" style="--flow: var(--s-4)">
+  <div class="flow">
+    <p class="eyebrow">1 · Colour</p>
+    <h2 class="h2">Three colours. The accent in three places.</h2>
+    <p class="prose">Lamp is used for links, the one call-to-action button, and the calculator's headline number. Nowhere else. Contrast ratios below were checked with the WCAG formula, not guessed.</p>
+  </div>
+  <div class="sg-swatches">
+    <div class="sg-swatch" style="background: var(--paper); color: var(--ink)"><strong>Paper</strong><code>#FAF9F6 · day background</code></div>
+    <div class="sg-swatch" style="background: var(--ink); color: var(--paper)"><strong>Ink</strong><code>#0F1319 · night background · 17.7:1 on Paper</code></div>
+    <div class="sg-swatch" style="background: var(--lamp); color: var(--ink)"><strong>Lamp</strong><code>#E9A23B · surfaces; text on Ink 8.6:1</code></div>
+    <div class="sg-swatch" style="background: var(--paper); color: var(--lamp-ink)"><strong>Lamp, as text on Paper</strong><code>#9A5F10 · 4.96:1</code></div>
+    <div class="sg-swatch" style="background: var(--paper); color: #5A5F6B"><strong>Muted, day</strong><code>#5A5F6B · 6.1:1</code></div>
+    <div class="sg-swatch" style="background: var(--ink); color: #A8ACB5"><strong>Muted, night</strong><code>#A8ACB5 · 8.2:1</code></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="container section flow" style="--flow: var(--s-6)">
+  <div class="flow">
+    <p class="eyebrow">2 · Type</p>
+    <h2 class="h2">One typeface. Sizes that scale with the screen.</h2>
+    <p class="prose">Inter, self-hosted from <code>/fonts</code>, so it looks identical on every device — decided 12 Sept after comparing against two serif options. One italic turn per headline, set in Lamp.</p>
+  </div>
+  <div class="flow" style="--flow: var(--s-4)">
+    <div><p class="sg-label">.hero · 40–80px · weight 600 · -0.03em</p><p class="hero">Websites and automation that work <em>while you're closed.</em></p></div>
+    <div><p class="sg-label">.h2 · 28–48px</p><p class="h2">Your website closes at five. Your clients don't.</p></div>
+    <div><p class="sg-label">.h3 · 20–26px</p><p class="h3">The Set-Aside Calculator</p></div>
+    <div><p class="sg-label">.lede · body × 1.2 · muted</p><p class="lede">A sole trader answers six questions and gets a real number: how much tax to put aside each month, and whether provisional tax is coming.</p></div>
+    <div><p class="sg-label">body · 17–18px · line-height 1.55 · max 62 characters</p><p class="prose">Most accounting websites in Christchurch are brochures. They list services, show a photo of the building, and offer a contact form. That form is the only way in, and it closes at five. Openhours builds the thing that keeps the door open: a small, useful tool on your site that answers a real question and turns the answer into a lead.</p></div>
+    <div><p class="sg-label">.num · tabular figures — digits share a width so results don't jiggle as they change</p><p class="h2 num"><span class="accent">$1,284</span> / month · 21.4% of every invoice</p></div>
+    <div><p class="sg-label">.eyebrow · .small</p><p class="eyebrow">For small accounting practices</p><p class="small">Estimates, not advice. Assumes a 31 March balance date.</p></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="container section flow" style="--flow: var(--s-4)">
+  <div class="flow">
+    <p class="eyebrow">3 · Space</p>
+    <h2 class="h2">An 8px grid.</h2>
+    <p class="prose">Every gap is a multiple of 8. Sections breathe with <code>--section</code> (64–128px depending on screen). Prose never runs past 62 characters a line.</p>
+  </div>
+  <div class="sg-scale">
+    <div><span>--s-1</span><span style="width: 0.5rem"></span></div>
+    <div><span>--s-2</span><span style="width: 1rem"></span></div>
+    <div><span>--s-3</span><span style="width: 1.5rem"></span></div>
+    <div><span>--s-4</span><span style="width: 2rem"></span></div>
+    <div><span>--s-6</span><span style="width: 3rem"></span></div>
+    <div><span>--s-8</span><span style="width: 4rem"></span></div>
+    <div><span>--s-12</span><span style="width: 6rem"></span></div>
+    <div><span>--s-16</span><span style="width: 8rem"></span></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section class="container section flow" style="--flow: var(--s-4)">
+  <div class="flow">
+    <p class="eyebrow">4 · Components</p>
+    <h2 class="h2">Buttons, fields, cards.</h2>
+  </div>
+  <div class="sg-row">
+    <a class="btn btn--primary" href="#">See it work</a>
+    <a class="btn btn--secondary" href="#">Get in touch</a>
+    <a href="#">A text link</a>
+  </div>
+  <div class="grid">
+    <form class="card flow" onsubmit="return false">
+      <div class="field"><label for="sg-name">Name</label><input id="sg-name" type="text" placeholder="Jane Smith"></div>
+      <div class="field"><label for="sg-email">Email</label><input id="sg-email" type="email" placeholder="jane@firm.co.nz"><p class="hint">We reply within one working day.</p></div>
+      <button class="btn btn--primary" type="submit">Send</button>
+    </form>
+    <div class="card flow">
+      <p class="eyebrow">Card</p>
+      <p class="h3">Preview, install, leads.</p>
+      <p>A 30-minute personalised preview in your colours, live for 14 days. Install is payment. Then the leads come to your inbox.</p>
+    </div>
+  </div>
+</section>
+
+<section class="surface section glow" data-theme="night">
+  <div class="container flow" style="--flow: var(--s-6)">
+    <div class="flow">
+      <p class="eyebrow">5 · Night</p>
+      <h2 class="h2">The same tokens, roles swapped.</h2>
+      <p class="prose">This is where the home page ends up after you scroll. Nothing is restyled — <code>--bg</code> and <code>--fg</code> trade places and the accent brightens.</p>
+    </div>
+    <p class="hero">The light <em>stays on.</em></p>
+    <p class="h2 num"><span class="accent">$1,284</span> / month</p>
+    <div class="sg-row">
+      <a class="btn btn--primary" href="#">See it work</a>
+      <a class="btn btn--secondary" href="#">Get in touch</a>
+      <a href="#">A text link</a>
+    </div>
+    <div class="grid">
+      <form class="card flow" onsubmit="return false">
+        <div class="field"><label for="sg-name2">Name</label><input id="sg-name2" type="text" placeholder="Jane Smith"></div>
+        <div class="field"><label for="sg-email2">Email</label><input id="sg-email2" type="email" placeholder="jane@firm.co.nz"><p class="hint">We reply within one working day.</p></div>
+        <button class="btn btn--primary" type="submit">Send</button>
+      </form>
+      <div class="card flow">
+        <p class="eyebrow">Card</p>
+        <p class="h3">Preview, install, leads.</p>
+        <p>A 30-minute personalised preview in your colours, live for 14 days. Install is payment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="container section small">
+  Openhours · style guide v1 · 12 Sept 2026 · Inter, Paper / Ink / Lamp
+</footer>
+
+</body>
+</html>
