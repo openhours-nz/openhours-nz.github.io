@@ -51,4 +51,31 @@
       }, { passive: true });
     });
   }
+
+  // 4. Contact form → n8n webhook. Progressive: without JS the form just doesn't submit anywhere useful.
+  const form = document.getElementById('contact-form');
+  if (form) {
+    const status = form.querySelector('.form-status');
+    const button = form.querySelector('button[type=submit]');
+    const sent = document.getElementById('contact-sent');
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (!form.reportValidity()) return;
+      const data = Object.fromEntries(new FormData(form));
+      if (data.website) { form.reset(); return; }             // honeypot filled: a bot. Say nothing, send nothing.
+      if (!form.dataset.endpoint) { status.textContent = 'The form isn\'t connected yet.'; return; }
+      button.disabled = true; status.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.dataset.endpoint, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: data.name, email: data.email, firm: data.firm, message: data.message, website: data.website, page: location.pathname, sent: new Date().toISOString() })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        form.hidden = true; sent.hidden = false; sent.scrollIntoView({ block: 'center' });
+      } catch (err) {
+        status.textContent = 'That didn\'t send. Please try again in a minute.';
+        button.disabled = false;
+      }
+    });
+  }
 })();

@@ -149,6 +149,8 @@ a:hover { text-decoration-thickness: 2px; }
   box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-surface) 35%, transparent);
 }
 .field .hint { font-size: var(--text-small); color: var(--fg-muted); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }   /* honeypot: humans never see it, bots fill it */
+.form-status:empty { display: none; }
 
 .card {
   border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s-4);

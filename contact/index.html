@@ -45,14 +45,20 @@
   <p class="lede">Tell me about your practice and I'll reply within one working day — usually the same evening.</p>
 </section>
 <section class="container section">
-  <form class="card flow" action="#" method="post" style="max-width: 36rem">
+  <form class="card flow" id="contact-form" action="#" method="post" data-endpoint="" style="max-width: 36rem" novalidate>
     <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
     <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
     <div class="field"><label for="firm">Firm <span class="small">(optional)</span></label><input id="firm" name="firm" type="text" autocomplete="organization"></div>
     <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="5" required></textarea></div>
+    <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
     <p class="small">Your details are used to reply to you and nothing else. <a href="/privacy/">Privacy.</a></p>
-    <button class="btn btn--primary" type="submit">Send</button>
+    <p class="sg-row" style="display:flex;gap:var(--s-2);align-items:center;flex-wrap:wrap"><button class="btn btn--primary" type="submit">Send</button> <span class="small form-status" role="status" aria-live="polite"></span></p>
   </form>
+  <div class="card flow" id="contact-sent" hidden style="max-width: 36rem">
+    <p class="eyebrow">Sent</p>
+    <p class="h3">Got it. <em class="accent">I'll reply within one working day.</em></p>
+    <p class="small">A copy of this confirmation is on its way to your inbox.</p>
+  </div>
 </section>
 </main>
 
