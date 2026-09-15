@@ -1,0 +1,101 @@
+/* Openhours — the Set-Aside Calculator  ·  tools/set-aside/set-aside.css
+   Every rule is scoped under .oh-tool so it can sit inside any site without touching it.
+   Colours come from the host page's tokens when they exist (--bg, --fg, --accent … on the Openhours site),
+   otherwise from the fallbacks below. A client's colours: set --oh-accent (and friends) on the embed div. */
+.oh-tool {
+  --oh-bg:        var(--bg, #FAF9F6);
+  --oh-fg:        var(--fg, #0F1319);
+  --oh-muted:     var(--fg-muted, #5A5F6B);
+  --oh-accent:    var(--accent, #9A5F10);
+  --oh-accent-bg: var(--accent-surface, #E9A23B);
+  --oh-on-accent: var(--on-accent, #0F1319);
+  --oh-line:      var(--line, rgb(15 19 25 / 0.12));
+  --oh-radius:    var(--radius, 0.5rem);
+  --oh-radius-lg: var(--radius-lg, 1rem);
+  --oh-s1: 0.5rem; --oh-s2: 1rem; --oh-s3: 1.5rem; --oh-s4: 2rem;
+  font: inherit; color: var(--oh-fg); line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  container-type: inline-size;
+}
+.oh-tool *, .oh-tool *::before, .oh-tool *::after { box-sizing: border-box; }
+.oh-tool p, .oh-tool ul, .oh-tool fieldset, .oh-tool legend { margin: 0; padding: 0; }
+.oh-tool fieldset { border: 0; min-width: 0; }
+.oh-tool small { font-size: 0.875em; font-weight: 400; color: var(--oh-muted); }
+.oh-tool strong { font-weight: 600; }
+.oh-accent { color: var(--oh-accent); }
+
+/* layout: inputs | results, side by side when there's room */
+.oh-tool__grid { display: grid; gap: var(--oh-s4); align-items: start; }
+@container (min-width: 52rem) { .oh-tool__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--oh-s4); } }
+.oh-tool__inputs, .oh-tool__results { display: grid; gap: var(--oh-s3); min-width: 0; }
+.oh-tool__intro { display: grid; gap: var(--oh-s1); }
+.oh-tool__results { position: sticky; top: var(--oh-s2); }
+
+/* type */
+.oh-tool__eyebrow { font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; color: var(--oh-muted); }
+.oh-tool__lede { color: var(--oh-muted); text-wrap: pretty; }
+.oh-hint { font-size: 0.9375rem; color: var(--oh-muted); }
+.oh-fine { font-size: 0.8125rem; color: var(--oh-muted); line-height: 1.45; }
+
+/* fields — same bones as the site's .field */
+.oh-field { display: grid; gap: 0.4rem; }
+.oh-field > label, .oh-field > legend { font-weight: 600; font-size: 0.9375rem; }
+.oh-tool input[type=number], .oh-tool input[type=text], .oh-tool input[type=email], .oh-tool select {
+  font: inherit; color: var(--oh-fg); background: transparent;
+  border: 1px solid var(--oh-line); border-radius: var(--oh-radius);
+  padding: 0.7em 0.9em; width: 100%; min-width: 0;
+}
+.oh-tool select { appearance: none; -webkit-appearance: none; padding-right: 2.4em;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' fill='none' stroke='%238A8F99' stroke-width='1.6'/></svg>");
+  background-repeat: no-repeat; background-position: right 0.9em center; }
+.oh-tool input:focus, .oh-tool select:focus { outline: none; border-color: var(--oh-fg); box-shadow: 0 0 0 3px color-mix(in oklab, var(--oh-accent-bg) 35%, transparent); }
+.oh-tool input[type=number] { -moz-appearance: textfield; }
+.oh-tool input[type=number]::-webkit-outer-spin-button, .oh-tool input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.oh-money { position: relative; }
+.oh-money > span { position: absolute; left: 0.9em; top: 50%; translate: 0 -50%; color: var(--oh-muted); pointer-events: none; }
+.oh-tool .oh-money > input { padding-left: 1.9em; }   /* specificity must beat .oh-tool input[type=number] above */
+
+/* yes / no — radios drawn as two pills */
+.oh-choice { display: grid; grid-template-columns: auto auto 1fr; gap: 0.5rem 0.6rem; align-items: center; }
+.oh-choice > legend { grid-column: 1 / -1; }
+.oh-choice > .oh-hint { grid-column: 1 / -1; }
+.oh-choice > label { position: relative; display: inline-flex; }
+.oh-choice > label > input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.oh-choice > label > span { display: inline-block; padding: 0.55em 1.1em; border: 1px solid var(--oh-line); border-radius: 999px; font-weight: 500; font-size: 0.9375rem; transition: background-color 150ms, border-color 150ms, color 150ms; }
+.oh-choice > label > input:checked + span { background: var(--oh-accent-bg); border-color: var(--oh-accent-bg); color: var(--oh-on-accent); font-weight: 600; }
+.oh-choice > label > input:focus-visible + span { outline: 2px solid var(--oh-accent); outline-offset: 3px; }
+@media (hover: hover) { .oh-choice > label:hover > input:not(:checked) + span { border-color: var(--oh-fg); } }
+
+/* results */
+.oh-result { display: grid; gap: var(--oh-s1); padding: var(--oh-s3); border-radius: var(--oh-radius-lg);
+  background: color-mix(in oklab, var(--oh-bg) 92%, var(--oh-fg)); box-shadow: 0 1px 0 var(--oh-line); }
+.oh-result__big { font-size: clamp(2.75rem, 2rem + 3vw, 4rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+.oh-result__unit { font-size: clamp(1.25rem, 1.125rem + 0.6vw, 1.625rem); font-weight: 500; color: var(--oh-muted); letter-spacing: 0; }
+.oh-result__sub { color: var(--oh-muted); }
+.oh-rows { list-style: none; border-top: 1px solid var(--oh-line); }
+.oh-rows li { display: flex; justify-content: space-between; gap: var(--oh-s3); padding: 0.7em 0; border-bottom: 1px solid var(--oh-line); font-size: 0.9375rem; }
+.oh-rows li span:last-child { text-align: right; font-weight: 500; white-space: nowrap; }
+.oh-rows li span:first-child { min-width: 0; }
+.oh-rows__total { font-weight: 600; }
+.oh-rows__total span:last-child { font-weight: 600; }
+.oh-note { padding: var(--oh-s2) var(--oh-s3); border: 1px solid var(--oh-line); border-radius: var(--oh-radius); font-size: 0.9375rem; text-wrap: pretty; }
+.oh-note--warn { border-color: color-mix(in oklab, var(--oh-accent) 55%, var(--oh-line)); background: color-mix(in oklab, var(--oh-accent-bg) 10%, transparent); }
+.oh-note--warn em { font-style: italic; color: var(--oh-accent); }
+.oh-sent { border-color: var(--oh-accent); }
+
+/* capture */
+.oh-capture { display: grid; gap: var(--oh-s2); padding-top: var(--oh-s2); border-top: 1px solid var(--oh-line); }
+.oh-capture__lede { font-size: 0.9375rem; color: var(--oh-muted); text-wrap: pretty; }
+.oh-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.oh-row { display: flex; gap: var(--oh-s2); align-items: center; flex-wrap: wrap; }
+.oh-status { font-size: 0.9375rem; color: var(--oh-muted); }
+.oh-status:empty { display: none; }
+.oh-btn { display: inline-flex; align-items: center; gap: 0.5em; padding: 0.8em 1.3em; border-radius: var(--oh-radius);
+  font: inherit; font-weight: 600; line-height: 1; cursor: pointer; border: 1px solid transparent;
+  background: var(--oh-accent-bg); color: var(--oh-on-accent); transition: background-color 150ms, transform 150ms; }
+.oh-btn:hover { background: color-mix(in oklab, var(--oh-accent-bg) 86%, #0F1319); }
+.oh-btn:active { transform: translateY(1px); }
+.oh-btn:disabled { opacity: 0.6; cursor: default; }
+.oh-btn:focus-visible { outline: 2px solid var(--oh-accent); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { .oh-tool *, .oh-tool *::before, .oh-tool *::after { transition: none !important; } }
