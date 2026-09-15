@@ -70,7 +70,9 @@
 .oh-result { display: grid; gap: var(--oh-s1); padding: var(--oh-s3); border-radius: var(--oh-radius-lg);
   background: color-mix(in oklab, var(--oh-bg) 92%, var(--oh-fg)); box-shadow: 0 1px 0 var(--oh-line); }
 .oh-result__big { font-size: clamp(2.75rem, 2rem + 3vw, 4rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1; }
+.oh-result__big--second { font-size: clamp(1.75rem, 1.25rem + 2vw, 2.5rem); margin-top: 0.15em; }
 .oh-result__unit { font-size: clamp(1.25rem, 1.125rem + 0.6vw, 1.625rem); font-weight: 500; color: var(--oh-muted); letter-spacing: 0; }
+.oh-result__big--second .oh-result__unit { font-size: clamp(1rem, 0.95rem + 0.4vw, 1.25rem); }
 .oh-result__sub { color: var(--oh-muted); }
 .oh-rows { list-style: none; border-top: 1px solid var(--oh-line); }
 .oh-rows li { display: flex; justify-content: space-between; gap: var(--oh-s3); padding: 0.7em 0; border-bottom: 1px solid var(--oh-line); font-size: 0.9375rem; }

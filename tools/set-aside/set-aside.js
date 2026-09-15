@@ -104,7 +104,7 @@
   /* ---------- 3. FORMAT ---------- */
   const nzd  = new Intl.NumberFormat('en-NZ', { style: 'currency', currency: 'NZD', maximumFractionDigits: 0 });
   const money = (n) => nzd.format(Math.round(n));
-  const pct   = (n) => (n * 100).toFixed(n * 100 < 10 ? 1 : 0) + '%';
+  const pct   = (n) => (n * 100).toFixed(1) + '%';   // one decimal, always — 15.2% × income must reconcile with the yearly total
   const esc   = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   /* ---------- 4. MARKUP — drawn once per embed. ---------- */
@@ -119,7 +119,7 @@
       <div class="oh-field">
         <label for="${id}-income">Business income this year, before expenses</label>
         <div class="oh-money"><span>$</span><input id="${id}-income" name="income" type="number" inputmode="decimal" min="0" step="1000" value="90000"></div>
-        <p class="oh-hint" data-hint="income">What you'll invoice this year, not counting GST.</p>
+        <p class="oh-hint" data-hint="income">What you'll invoice this year, not counting GST. Paid per job? Guess the year — the percentage below is what you'll use.</p>
       </div>
 
       <div class="oh-field">
@@ -159,8 +159,9 @@
     <div class="oh-tool__results">
       <div class="oh-result" aria-live="polite" aria-atomic="true">
         <p class="oh-tool__eyebrow">Put aside</p>
-        <p class="oh-result__big"><span class="oh-accent" data-out="perMonth">—</span> <span class="oh-result__unit">a month</span></p>
-        <p class="oh-result__sub">That's <strong data-out="perInvoice">—</strong> of every invoice, before GST.</p>
+        <p class="oh-result__big"><span class="oh-accent" data-out="perInvoice">—</span> <span class="oh-result__unit">of every invoice</span></p>
+        <p class="oh-result__big oh-result__big--second"><span data-out="perMonth">—</span> <span class="oh-result__unit">a month</span></p>
+        <p class="oh-result__sub">Move the percentage into a tax account every time a job pays — whatever the job is worth. The monthly figure is the same money if your income is steady.</p>
       </div>
       <ul class="oh-rows">
         <li><span>Income tax for the year</span><span data-out="businessTax">—</span></li>
@@ -221,7 +222,7 @@
     let last = null;
     const render = () => {
       const r = compute(read()); last = r;
-      root.querySelector('[data-hint="income"]').textContent = r.gst ? 'What you\'ll invoice this year, not counting GST.' : 'What you\'ll invoice this year.';
+      root.querySelector('[data-hint="income"]').textContent = (r.gst ? 'What you\'ll invoice this year, not counting GST.' : 'What you\'ll invoice this year.') + ' Paid per job? Guess the year — the percentage below is what you\'ll use.';
       const empty = r.income <= 0;
       set('perMonth',   empty ? '—' : money(r.perMonth));
       set('perInvoice', empty ? '—' : pct(r.perInvoice));
